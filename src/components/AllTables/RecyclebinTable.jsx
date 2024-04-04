@@ -191,7 +191,6 @@ export default function RecyclebinTable({
                       tabIndex={-1}
                       key={index}
                       selected={isItemSelected}
-                      sx={{ cursor: "pointer" }}
                     >
                       <TableCell
                         // onClick={() => callApi(data)}

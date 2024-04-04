@@ -165,7 +165,6 @@ export default function WorkspaceTable({
                       tabIndex={-1}
                       key={index}
                       selected={isItemSelected}
-                      sx={{ cursor: "pointer" }}
                     >
                       <TableCell
                         style={{

@@ -12,6 +12,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import ShareIcon from "@mui/icons-material/Share";
+import BlockIcon from "@mui/icons-material/Block";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ArticleIcon from "@mui/icons-material/Article";
 import TableSortLabel from "@mui/material/TableSortLabel";
@@ -20,6 +21,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import TablePagination from "@mui/material/TablePagination";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import DriveFileMoveIcon from "@mui/icons-material/DriveFileMove";
+import StopScreenShareIcon from "@mui/icons-material/StopScreenShare";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import SportsVolleyballRoundedIcon from "@mui/icons-material/SportsVolleyballRounded";
 function EnhancedTableHead(props) {
@@ -67,13 +69,14 @@ export default function CommonTable({
   searchTerm,
   setPropertys,
   allfolderlist,
-  onEditFileClick,
   onFileDownload,
+  onEditFileClick,
   handleClickMove,
   PermissionPolicy,
   onDownloadfolders,
   handleClickLinkOpen,
   openEditFolderModal,
+  handleClickShareOpen,
   handleOpenDeleteFile,
   handleOpenPermission,
   onEditPermissionClick,
@@ -209,7 +212,7 @@ export default function CommonTable({
                       selected={isItemSelected}
                       sx={{
                         cursor: data.file_type ? "" : "pointer",
-                    }}                    
+                      }}
                     >
                       <TableCell
                         onClick={() => (data.file_type ? "" : callApi(data))}
@@ -270,6 +273,16 @@ export default function CommonTable({
                           ) : (
                             ""
                           )}
+                          {data?.isShared === true && (
+                            <Tooltip
+                              title="Share Cancel"
+                              onClick={() =>
+                                handleClickShareOpen(data?.id, data?.file_type)
+                              }
+                            >
+                              <BlockIcon fontSize="small" sx={{ mr: 1 }} />
+                            </Tooltip>
+                          )}
                           <Tooltip
                             title="View"
                             onClick={() => {
@@ -290,7 +303,7 @@ export default function CommonTable({
                             title="Edit"
                             onClick={() => {
                               if (data.file_type) {
-                                onEditFileClick(data.id,data?.file_type);
+                                onEditFileClick(data.id, data?.file_type);
                               } else {
                                 openEditFolderModal(data?.id);
                               }
@@ -401,6 +414,16 @@ export default function CommonTable({
                             </Tooltip>
                           ) : (
                             ""
+                          )}
+                          {data?.isShared === true && (
+                            <Tooltip
+                              title="Share Cancel"
+                              onClick={() =>
+                                handleClickShareOpen(data?.id, data?.file_type)
+                              }
+                            >
+                              <BlockIcon fontSize="small" sx={{ mr: 1 }} />
+                            </Tooltip>
                           )}
                           {data?.permission?.view == true ||
                           workspacePermissionWs1?.view == true ? (

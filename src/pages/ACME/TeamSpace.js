@@ -43,6 +43,7 @@ const TeamSpace = () => {
     workSpaceData,
     getallversions,
     add_permission,
+    sharingcancel,
     addcreatefolder,
     add_updatefolder,
     getGroupsDropdown,
@@ -1470,6 +1471,47 @@ const TeamSpace = () => {
     });
   };
   // ---------------------------------Ws1 Rights
+    // ---------------------------------sharingcancel
+    const [openShare, setOpenShare] = React.useState({
+      status: false,
+      data: {},
+    });
+    const handleClickShareOpen = (id, file_type) => {
+      setOpenShare({
+        status: true,
+        data: { id, file_type },
+      });
+    };
+    const handleCloseShare = () => {
+      setOpenShare({
+        status: false,
+        data: "",
+      });
+    };
+    const onSharingcancel = (id, file_type) => {
+      let data;
+      if (file_type) {
+        data = { file_id: id };
+      }else{
+        data = { folder_id: id };
+      }
+      sharingcancel(
+        data,
+        (apiRes) => {
+          notification["success"]({
+            placement: "top",
+            description: "",
+            message: "All Sharing Cancel Successfully",
+            style: {
+              height: 60,
+            },
+          });
+          handleCloseShare()
+        },
+        (apiErr) => {}
+      );
+    };
+    // ---------------------------------sharingcancel
   return (
     <>
       <Head title="TeamSpace - Regular"></Head>
@@ -1508,6 +1550,14 @@ const TeamSpace = () => {
             }
             data={openDelete?.data?.id}
             file_type={openDelete.data.file_type}
+          />
+          <ModalPop
+            open={openShare.status}
+            handleOkay={onSharingcancel}
+            data={openShare?.data?.id}
+            handleClose={handleCloseShare}
+            file_type={openShare.data.file_type}
+            title="Sharing Cancel? You Sure!"
           />
           <FileFolderProperties
             list={list}
@@ -1657,6 +1707,7 @@ const TeamSpace = () => {
             handleOpenDeleteFile={handleClickOpen}
             openEditFolderModal={onEditFolderClick}
             handleClickLinkOpen={handleClickLinkOpen}
+            handleClickShareOpen={handleClickShareOpen}
             handleOpenPermission={handleOpenPermission}
             onEditPermissionClick={onEditPermissionClick}
             workspacePermissionWs1={workspacePermissionWs1}

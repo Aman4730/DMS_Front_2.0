@@ -62,7 +62,8 @@ const Login = () => {
             description: "",
             message: data?.message,
             style: {
-              height: 60,
+              paddingBottom: "-160px",
+
             },
           });
         } else {
@@ -71,7 +72,8 @@ const Login = () => {
             description: "",
             message: data?.message,
             style: {
-              height: 60,
+              paddingBottom: "-160px",
+
             },
           });
         }
@@ -83,7 +85,7 @@ const Login = () => {
             description: "",
             message: "Server Error",
             style: {
-              height: 60,
+              // height: 60,
             },
           });
         }

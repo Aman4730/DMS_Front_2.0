@@ -131,7 +131,6 @@ export default function DoctypeTable({
                       aria-checked={isItemSelected}
                       tabIndex={-1}
                       selected={isItemSelected}
-                      sx={{ cursor: "pointer" }}
                     >
                       <TableCell style={{ fontSize: "12px" }}>
                         {row.doctype_name}

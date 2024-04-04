@@ -41,6 +41,7 @@ const WS1 = () => {
     getWorkspace,
     userDropdownU,
     workSpaceData,
+    sharingcancel,
     getallversions,
     add_permission,
     addcreatefolder,
@@ -68,7 +69,6 @@ const WS1 = () => {
     selected_group: [],
     selected_users: [],
   });
-  console.log(permissionForm.selected_group, "permissionForm");
   const [currentFolderData, setCurrentFolderData] = useState({
     folder_name: "",
     levels: 0,
@@ -923,7 +923,7 @@ const WS1 = () => {
     setPropertiesModel({ status: true, data: data });
   };
   const propertiesModelClose = () => {
-    setPropertiesModel(false);
+    setPropertiesModel({ status: false, data: "" });
   };
   // ---------------------------------Properties
   // ---------------------------------Comments
@@ -958,8 +958,8 @@ const WS1 = () => {
         if (apiRes.status == 200) {
           notification.success({
             message: "Comment Created Successfully",
-            placement: "topRight", // Adjust placement as needed
-            duration: 3, // Set the duration (in seconds) the notification is displayed
+            placement: "topRight",
+            duration: 3,
             style: {
               height: 60,
             },
@@ -1273,7 +1273,7 @@ const WS1 = () => {
         (apiErr) => {}
       );
     } else {
-      let data 
+      let data;
       if (file_type) {
         data = {
           file_id: id,
@@ -1458,6 +1458,56 @@ const WS1 = () => {
     });
   };
   // ---------------------------------workspace Permission
+  // ---------------------------------sharingcancel
+  const [openShare, setOpenShare] = React.useState({
+    status: false,
+    data: {},
+  });
+  const handleClickShareOpen = (id, file_type) => {
+    setOpenShare({
+      status: true,
+      data: { id, file_type },
+    });
+  };
+  const handleCloseShare = () => {
+    setOpenShare({
+      status: false,
+      data: "",
+    });
+  };
+  const onSharingcancel = (id, file_type) => {
+    let data;
+    if (file_type) {
+      data = { file_id: id };
+    } else {
+      data = { folder_id: id };
+    }
+    sharingcancel(
+      data,
+      (apiRes) => {
+        if (apiRes.status === 200) {
+          notification["success"]({
+            placement: "topRight",
+            description: "",
+            message: "All Sharing Cancel Successfully",
+            style: {
+              height: 60,
+            },
+          });
+          handleCloseShare();
+        }
+        let newData = {
+          parent_id: currentFolderData?.id,
+          levels: currentFolderData?.levels + 1,
+          workspace_id: JSON.stringify(workSpaceData.workspace_id),
+          workspace_name: workSpaceData?.workspace_name,
+        };
+        getAllfoldernames(newData);
+      },
+      (apiErr) => {}
+    );
+  };
+  // ---------------------------------sharingcancel
   return (
     <>
       <Head title="My Workspace - Regular"></Head>
@@ -1496,6 +1546,14 @@ const WS1 = () => {
                 ? "File Deleted?  You Sure!"
                 : "Folder Deleted?  You Sure!"
             }
+          />
+          <ModalPop
+            open={openShare.status}
+            handleOkay={onSharingcancel}
+            data={openShare?.data?.id}
+            handleClose={handleCloseShare}
+            file_type={openShare.data.file_type}
+            title="Sharing Cancel? You Sure!"
           />
           <FileFolderProperties
             list={list}
@@ -1645,6 +1703,7 @@ const WS1 = () => {
             handleOpenDeleteFile={handleClickOpen}
             openEditFolderModal={onEditFolderClick}
             handleClickLinkOpen={handleClickLinkOpen}
+            handleClickShareOpen={handleClickShareOpen}
             handleOpenPermission={handleOpenPermission}
             onEditPermissionClick={onEditPermissionClick}
             workspacePermissionWs1={workspacePermissionWs1}

@@ -152,6 +152,7 @@ export default function DataGridCard({ tableData }) {
                     tabIndex={-1}
                     selected={isItemSelected}
                     sx={{
+                      cursor: "pointer",
                       backgroundColor: isEvenRow ? "#F4F6F6 " : "transparent",
                     }}
                   >

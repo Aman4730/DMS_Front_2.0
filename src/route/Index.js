@@ -166,7 +166,6 @@ const Pages = () => {
   // }
   // hideEndpoints();
   function hideEndpointsOnLoad() {
-    // Get the current URL
     const currentURL = window.location.href;
 
     const endpointsToHide = [

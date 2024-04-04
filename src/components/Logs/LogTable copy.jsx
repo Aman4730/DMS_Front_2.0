@@ -187,7 +187,6 @@ export default function LogTable({
                     tabIndex={-1}
                     key={row.name}
                     selected={isItemSelected}
-                    sx={{ cursor: "pointer" }}
                   >
                     <TableCell>{row.createdAt}</TableCell>
                     <TableCell>{row.user_id}</TableCell>

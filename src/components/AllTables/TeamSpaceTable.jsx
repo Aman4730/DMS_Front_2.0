@@ -12,6 +12,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import ShareIcon from "@mui/icons-material/Share";
+import BlockIcon from "@mui/icons-material/Block";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ArticleIcon from "@mui/icons-material/Article";
 import TableSortLabel from "@mui/material/TableSortLabel";
@@ -72,6 +73,7 @@ export default function TeamSpaceTable({
   handleClickLinkOpen,
   openEditFolderModal,
   handleOpenDeleteFile,
+  handleClickShareOpen,
   handleOpenPermission,
   onEditPermissionClick,
   handleClickOpenCommets,
@@ -209,7 +211,6 @@ export default function TeamSpaceTable({
                   for (let i = 0; i < data?.share_with?.length; i++) {
                     share_with = share_with + "\n" + data?.share_with[i];
                   }
-                  console.log(convertedExpiryDate, "convertedExpiryDate");
                   return (
                     <TableRow
                       hover
@@ -226,7 +227,7 @@ export default function TeamSpaceTable({
                         onClick={() => (data.file_type ? "" : callApi(data))}
                         className="tablefont"
                         style={{
-                          fontSize: "13px",
+                          fontSize: "12px",
                           whiteSpace: "nowrap",
                           overflow: "hidden",
                           textOverflow: "ellipsis",
@@ -247,11 +248,25 @@ export default function TeamSpaceTable({
                         />
                         {data?.file_name || data?.folder_name}
                       </TableCell>
-                      <TableCell style={{ fontSize: "12px" }}>
+                      <TableCell
+                        style={{
+                          fontSize: "12px",
+                          whiteSpace: "nowrap",
+                          maxWidth: "250px",
+                        }}
+                      >
                         {convertedTimestamp}
                       </TableCell>
-                      <TableCell style={{ fontSize: "12px" }}>
-                        {convertedExpiryDate == "Invalid Date" ? "No Expiry" : convertedExpiryDate}
+                      <TableCell
+                        style={{
+                          fontSize: "12px",
+                          whiteSpace: "nowrap",
+                          maxWidth: "250px",
+                        }}
+                      >
+                        {convertedExpiryDate == "Invalid Date"
+                          ? "No Expiry"
+                          : convertedExpiryDate}
                       </TableCell>
                       <TableCell
                         style={{
@@ -285,7 +300,13 @@ export default function TeamSpaceTable({
                           {data.share_with || "Not Shared"}
                         </abbr>
                       </TableCell>
-                      <TableCell style={{ fontSize: "13px" }}>
+                      <TableCell
+                        style={{
+                          fontSize: "12px",
+                          whiteSpace: "nowrap",
+                          maxWidth: "250px",
+                        }}
+                      >
                         {formattedSize}
                       </TableCell>
                       {isLogin.user_type == "Admin" ? (
@@ -309,6 +330,22 @@ export default function TeamSpaceTable({
                           ) : (
                             ""
                           )}
+                          {data?.shared_by?.length > 0 &&
+                            (data?.share_with?.length > 0 ? (
+                              <Tooltip
+                                title="Share Cancel"
+                                onClick={() =>
+                                  handleClickShareOpen(
+                                    data?.id,
+                                    data?.file_type
+                                  )
+                                }
+                              >
+                                <BlockIcon fontSize="small" sx={{ mr: 1 }} />
+                              </Tooltip>
+                            ) : (
+                              ""
+                            ))}
                           <Tooltip
                             title="View"
                             onClick={() => {

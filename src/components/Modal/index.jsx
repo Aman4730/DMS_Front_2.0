@@ -1,12 +1,12 @@
 import React from "react";
 import { TextField } from "@mui/material";
 import {
-  Button,
   Dialog,
   DialogTitle,
   FormControl,
   DialogActions,
 } from "@mui/material";
+import { Button } from "antd";
 const ModalPop = ({
   open,
   data,
@@ -57,9 +57,7 @@ const ModalPop = ({
       <DialogActions>
         <Button
           onClick={handleClose}
-          style={{
-            outline: "none",
-          }}
+          color="primary" size="md"
         >
           {buttonCancelTitle}
         </Button>

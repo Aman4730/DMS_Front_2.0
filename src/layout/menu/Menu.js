@@ -342,7 +342,6 @@ const Menu = ({ sidebarToggle, mobileView }) => {
     },
   ];
   const run = "false";
-  // Check if the permission for the recycle bin is granted
   if (loginData?.recycle_bin === "true") {
     teamSpaceMenu.push({
       icon: "trash-fill",

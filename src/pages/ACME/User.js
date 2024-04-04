@@ -313,17 +313,14 @@ const UserListRegularPage = () => {
         },
       });
     }
-    // Call the 'blockUser' function with the 'statusCheck' for blocking or unblocking the user
     blockUser(
       statusCheck,
       (apiRes) => {
-        // On successful API response
         if (200 === 200) {
-          // Reset the 'statusCheck' object and perform other actions like resetting the form, closing modals, and refreshing the user list
           statusCheck = {};
           resetForm();
-          setModal({ edit: false }, { add: false }); // There's an error in this line, the correct way is to use a single object: setModal({ edit: false, add: false });
-          getUsers(); // Refresh the user list (assuming this function fetches the user list)
+          setModal({ edit: false }, { add: false }); 
+          getUsers();
         }
         setAuthToken(token);
       },
@@ -347,7 +344,6 @@ const UserListRegularPage = () => {
       value: 1,
     },
   ];
-  // An array of table header configurations used for displaying table headers
   const tableHeader = [
     {
       id: "Display Name",

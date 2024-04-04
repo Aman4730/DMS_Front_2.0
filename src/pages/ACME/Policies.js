@@ -134,6 +134,7 @@ const Policies = () => {
   const filterUserDropdown = userDropdowns.filter(
     (email) => !allUserNamesArr.includes(email)
   );
+  console.log(filterUserDropdown,"filterUserDropdown")
   const getUserRselect = () => {
     userDropdownU(
       {},
@@ -453,7 +454,7 @@ const Policies = () => {
         editingIndex={editingIndex}
         onFormSubmit={onFormSubmit}
         editExtension={editExtension}
-        userDropdowns={filterUserDropdown}
+        userDropdowns={userDropdowns}
         setAddPolicies={setAddPolicies}
         groupsDropdown={groupsDropdown}
         checkboxValues={checkboxValues}

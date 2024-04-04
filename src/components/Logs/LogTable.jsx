@@ -212,7 +212,6 @@ export default function LogTable({
                     tabIndex={-1}
                     key={index}
                     selected={isItemSelected}
-                    sx={{ cursor: "pointer" }}
                   >
                     <TableCell style={{ fontSize: "12px" }}>
                       {convertedTimestamp}

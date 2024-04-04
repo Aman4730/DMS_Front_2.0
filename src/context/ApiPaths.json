@@ -9,6 +9,7 @@
         "guestlogin":"guestlogin",
         "getrecycle":"getrecycle",
         "guestdata":"guestdata",
+        "sharingcancel":"sharingcancel",
         "deletesmtp":"deletesmtp",
         "add_permission":"add_permission",
         "getallversions":"getallversions",

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Grid, Stack } from "@mui/material";
 import Head from "../../layout/head/Head";
+import { Grid, Stack } from "@mui/material";
 import "react-datepicker/dist/react-datepicker.css";
 import { UserContext } from "../../context/UserContext";
 import CustomCards from "../../components/dashboardPages/CustomCards";
@@ -16,7 +16,6 @@ const Dashboard = () => {
     getcountextension,
     getlatestfolderfiles,
   } = useContext(UserContext);
-
   const [counts, setCounts] = useState([]);
   const [tableData, setTableData] = useState([]);
   const [userquota, setUserquota] = useState([]);
@@ -33,7 +32,6 @@ const Dashboard = () => {
       abortController.abort();
     };
   }, []);
-
   //Card Data
   const getworkspace = () => {
     getCountworkspace(
@@ -44,7 +42,6 @@ const Dashboard = () => {
       (apiErr) => {}
     );
   };
-
   //dashboard table
   const getFolderFile = () => {
     getlatestfolderfiles(
@@ -60,7 +57,6 @@ const Dashboard = () => {
       }
     );
   };
-
   //storage Quota
   const getQuotadetails = () => {
     getquotadetails(
@@ -72,7 +68,6 @@ const Dashboard = () => {
       (apiErr) => {}
     );
   };
-
   //Total Extension Data
   const getExtension = () => {
     getcountextension(
@@ -83,7 +78,6 @@ const Dashboard = () => {
       (apiErr) => {}
     );
   };
-
   return (
     <React.Fragment>
       <Head title="Dashboard - Regular" />

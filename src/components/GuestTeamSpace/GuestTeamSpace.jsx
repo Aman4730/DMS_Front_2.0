@@ -178,8 +178,7 @@ const GuestTeamSpace = () => {
     };
     getWorkspacePermission(
       data,
-      (apiRes) => {
-      },
+      (apiRes) => {},
       (apiErr) => {}
     );
   };
@@ -546,7 +545,7 @@ const GuestTeamSpace = () => {
         formData.append("file", file);
         formData.append("data", JSON.stringify(data));
         const workspace_type = guestTableData?.workspace_type?.trim();
-        const query = `${file.size},${guestTableData?.workspace_name}`
+        const query = `${file.size},${guestTableData?.workspace_name}`;
         const file_type = file.name?.split(".")[1];
         const response = await axios.post(
           `${process.env.REACT_APP_API_URL_LOCAL}/uploadcreate?q=${query}&fileExtension=${file_type}&workspace_type=${workspace_type}`,
@@ -964,7 +963,26 @@ const GuestTeamSpace = () => {
       workspace_name: data?.workspace_name,
       workspace_id: data?.workspace_id,
     };
+    console.log(data, "outCheck");
     if (data.levels == 0) {
+      // console.log(data,"innerCheck")
+      setDefaultPermission(data);
+    }
+    if (
+      data.view == "true" ||
+      data.rename == "true" ||
+      data.download == "true" ||
+      data.move == "true" ||
+      data.share == "true" ||
+      data.delete_action == "true" ||
+      data.comment == "true" ||
+      data.properties == "true" ||
+      data.rights == "true" ||
+      data.create_folder == "true" ||
+      data.upload_file == "true" ||
+      data.upload_folder == "true"
+    ) {
+      // console.log(data,"innerCheck")
       setDefaultPermission(data);
     }
     setGuestTableData(data);

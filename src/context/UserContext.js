@@ -428,6 +428,22 @@ export const UserContextProvider = (props) => {
       }
     );
   }
+  async function sharingcancel(
+    userSubmittedData,
+    handleApiRes,
+    handleApiError
+  ) {
+    await AxiosPost(
+      "sharingcancel",
+      userSubmittedData,
+      (apiRes) => {
+        handleApiRes(apiRes);
+      },
+      (apiError) => {
+        handleApiError(apiError);
+      }
+    );
+  }
   async function getproperties(data, handleApiRes, handleApiError) {
     await AxiosPost(
       "getproperties",
@@ -1154,6 +1170,7 @@ export const UserContextProvider = (props) => {
         getlatestfolderfiles: getlatestfolderfiles,
         getWorkspacePermission: getWorkspacePermission,
         editsmtp: editsmtp,
+        sharingcancel:sharingcancel,
         updateUser: updateUser,
         userDropdownU: userDropdownU,
         deleteNotes: deleteNotes,

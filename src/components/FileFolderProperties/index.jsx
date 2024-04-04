@@ -25,7 +25,7 @@ export default function FileFolderProperties({
     };
     return originalDate.toLocaleString("en-US", options);
   }
-  const originalTimestamp1 = propertiesData?.updatedAt; // Replace with your actual timestamp
+  const originalTimestamp1 = propertiesData?.updatedAt; 
   const formattedDate1 = convertTimestampToFormattedDate(originalTimestamp1);
   function formatFileSize(sizeInBytes) {
     if (sizeInBytes < 1024) {
